@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/cp_search_view" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/z_color_back_edt_search" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cp_city_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white" />
+
+            <TextView
+                android:id="@+id/cp_overlay"
+                android:layout_width="?attr/cpOverlayWidth"
+                android:layout_height="?attr/cpOverlayHeight"
+                android:layout_centerInParent="true"
+                android:background="?attr/cpOverlayBackground"
+                android:gravity="center"
+                android:textColor="?attr/cpOverlayTextColor"
+                android:textSize="?attr/cpOverlayTextSize"
+                android:visibility="gone" />
+
+            <include layout="@layout/cp_empty_view" />
+        </RelativeLayout>
+
+        <!--右侧字母导航-->
+        <com.szjoin.joinmapmodule.view.JoinCitySidebar
+            android:id="@+id/cp_side_index_bar"
+            android:layout_width="@dimen/cp_index_bar_width"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shape_edt_stroke" />
+
+    </LinearLayout>
+
+</LinearLayout>
