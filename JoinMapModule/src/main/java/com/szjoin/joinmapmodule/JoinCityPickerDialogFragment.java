@@ -26,12 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.szjoin.joinmapmodule.adapter.JoinCityListAdapter;
 import com.szjoin.joinmapmodule.bean.JoinCityBean;
@@ -45,6 +44,8 @@ import com.szjoin.joinmapmodule.interfaces.JoinInnerListener;
 import com.szjoin.joinmapmodule.interfaces.JoinOnPickListener;
 import com.szjoin.joinmapmodule.interfaces.JoinSearchActionInterface;
 import com.szjoin.joinmapmodule.map.LocationService;
+import com.szjoin.joinmapmodule.map.MapLocationReceiver;
+import com.szjoin.joinmapmodule.map.MyLocationListener;
 import com.szjoin.joinmapmodule.utils.JoinChineseSortUtil;
 import com.szjoin.joinmapmodule.utils.JoinCityState;
 import com.szjoin.joinmapmodule.utils.JoinMapUtils;
@@ -59,7 +60,8 @@ import java.util.List;
  * 创建日期：2021/06/10 10:05
  * 类描述：城市选择布局弹窗
  */
-public class JoinCityPickerDialogFragment extends DialogFragment implements TextWatcher, JoinInnerListener, View.OnClickListener, JoinCitySidebar.OnIndexTouchedChangedListener {
+public class JoinCityPickerDialogFragment extends DialogFragment implements TextWatcher, JoinInnerListener, View.OnClickListener, JoinCitySidebar.OnIndexTouchedChangedListener, MapLocationReceiver
+{
     private String TAG = getClass().getSimpleName();
 
     private LinearLayout cpSearchView;
@@ -107,7 +109,8 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
 
     private int height;
     private int width;
-
+    private LocationClient mClient;
+    private MyLocationListener myLocationListener;
 
     @SuppressLint("ResourceType")
     public void setAnimationStyle(@StyleRes int resId) {
@@ -147,6 +150,16 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         initFindView();
         initViews();
         initData();
+        initLocation();
+    }
+
+    private void initLocation() {
+        myLocationListener = new MyLocationListener(this);
+        mClient = new LocationClient(getActivity().getApplicationContext());
+        mClient.setLocOption(LocationService.get().getDefaultLocationClientOption());
+        mClient.registerLocationListener(myLocationListener);
+
+
     }
 
     private void initFindView() {
@@ -344,21 +357,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         cpCancel.setOnClickListener(this);
         cpClearAll.setOnClickListener(this);
 
-        BDAbstractLocationListener bdAbstractLocationListener = new BDAbstractLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                Log.e(TAG, "onReceiveLocation: " );
-                if (!TextUtils.isEmpty(bdLocation.getCity())) {
-                    locationChanged(new JoinLocatedCityBean(bdLocation.getCity(),
-                            bdLocation.getProvince(), bdLocation.getCityCode(),
-                            bdLocation.getLatitude() + "", bdLocation.getLongitude() + ""), JoinCityState.SUCCESS
-                    );
-                    LocationService.stop(this);
-                }
 
-            }
-        };
-        LocationService.start(bdAbstractLocationListener);
 
     }
 
@@ -392,6 +391,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         if (joinOnPickListener != null) {
             joinOnPickListener.onPick(position, data);
         }
+        mClient.stop();
     }
 
     @Override
@@ -400,11 +400,13 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         if (joinOnPickListener != null) {
             joinOnPickListener.onPick(position, city);
         }
+        mClient.stop();
     }
 
     @Override
     public void locate() {
         Log.e(TAG, "locate: ");
+        mClient.start();
     }
 
     @Override
@@ -501,6 +503,21 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
 
     public void setCustomData(ArrayList<JoinCityBean> custom_listdata) {
         this.joinCityCustomBeans = custom_listdata;
+
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        Log.e(TAG, "onReceiveLocation: " + bdLocation.getCity());
+        if (!TextUtils.isEmpty(bdLocation.getCity())) {
+            locationChanged(new JoinLocatedCityBean(bdLocation.getCity(),
+                    bdLocation.getProvince(), bdLocation.getCityCode(),
+                    bdLocation.getLatitude() + "", bdLocation.getLongitude() + ""), JoinCityState.SUCCESS
+
+            );
+            mClient.stop();
+        }
+
 
     }
 }

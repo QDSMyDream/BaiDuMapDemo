@@ -1,5 +1,6 @@
 package com.szjoin.joinmapmodule;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -9,27 +10,27 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
 import com.szjoin.joinmapmodule.bean.JoinCityBean;
 import com.szjoin.joinmapmodule.bean.JoinCityHotBean;
 import com.szjoin.joinmapmodule.bean.JoinLocatedCityBean;
 import com.szjoin.joinmapmodule.config.JoinCityPickerConfig;
 import com.szjoin.joinmapmodule.interfaces.JoinOnPickListener;
 import com.szjoin.joinmapmodule.interfaces.JoinSearchActionInterface;
-import com.szjoin.joinmapmodule.map.LocationService;
+import com.szjoin.joinmapmodule.map.MyLocationListener;
 import com.szjoin.joinmapmodule.utils.JoinCityState;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * 创建人：MyDream
  * 创建日期：2021/06/10 09:56
  * 类描述：城市选择器   默认集成百度地图定位
  */
-public class JoinCityPicker {
+public class JoinCityPicker  {
     private final String TAG = getClass().getSimpleName();
 
     private WeakReference<FragmentActivity> mContext;
@@ -37,6 +38,8 @@ public class JoinCityPicker {
     private WeakReference<Fragment> mFragment;
 
     private WeakReference<FragmentManager> mFragmentManager;
+
+    private Context context;
 
     private boolean enableAnim;
 
@@ -51,8 +54,10 @@ public class JoinCityPicker {
     private JoinCityPickerConfig cityPickerConfig = new JoinCityPickerConfig();
     private ArrayList<JoinCityBean> custom_listdata;
 
-
+    private MyLocationListener myLocationListener;
     private JoinSearchActionInterface searchActionInterface;//搜索回调接口
+
+    private LocationClient mClient;
 
 
     private JoinCityPicker() {
@@ -70,6 +75,7 @@ public class JoinCityPicker {
     }
 
     private JoinCityPicker(FragmentActivity activity, Fragment fragment) {
+        context = activity.getApplicationContext();
         mContext = new WeakReference<>(activity);
         mFragment = new WeakReference<>(fragment);
 //        cityPickerConfig = new CityPickerConfig();
@@ -135,6 +141,7 @@ public class JoinCityPicker {
         this.mLocation = location;
         return this;
     }
+
     /**
      * 设置自定义模块内容
      *
@@ -299,6 +306,7 @@ public class JoinCityPicker {
         joinCityPickerDialogFragment.show(ft, TAG);
 
 
+
     }
 
     /**
@@ -323,4 +331,9 @@ public class JoinCityPicker {
             fragment.updateResult(_mResults);
         }
     }
+
+
+
+
+
 }
