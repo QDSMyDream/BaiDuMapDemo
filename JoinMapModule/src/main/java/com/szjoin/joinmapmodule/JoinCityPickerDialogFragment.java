@@ -26,9 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.github.promeg.pinyinhelper.Pinyin;
@@ -52,6 +54,7 @@ import com.szjoin.joinmapmodule.utils.JoinMapUtils;
 import com.szjoin.joinmapmodule.utils.ScreenUtil;
 import com.szjoin.joinmapmodule.view.JoinCitySidebar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -414,6 +417,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         int id = v.getId();
         if (id == R.id.cp_cancel) {
             dismiss();
+            mClient.stop();
             if (joinOnPickListener != null) {
                 joinOnPickListener.onCancel();
             }
