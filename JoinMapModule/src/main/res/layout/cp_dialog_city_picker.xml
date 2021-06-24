@@ -30,13 +30,13 @@
 
             <TextView
                 android:id="@+id/cp_overlay"
-                android:layout_width="?attr/cpOverlayWidth"
-                android:layout_height="?attr/cpOverlayHeight"
+                android:layout_width="@dimen/cp_overlay_width"
+                android:layout_height="@dimen/cp_overlay_height"
                 android:layout_centerInParent="true"
-                android:background="?attr/cpOverlayBackground"
+                android:background="@drawable/cp_overlay_bg"
                 android:gravity="center"
-                android:textColor="?attr/cpOverlayTextColor"
-                android:textSize="?attr/cpOverlayTextSize"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/cp_overlay_text_size"
                 android:visibility="gone" />
 
             <include layout="@layout/cp_empty_view" />

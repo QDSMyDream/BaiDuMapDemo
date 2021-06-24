@@ -181,8 +181,7 @@ public class JoinCityListAdapter extends RecyclerView.Adapter<JoinCityListAdapte
             //设置宽高
             DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
             int screenWidth = dm.widthPixels;
-            TypedValue typedValue = new TypedValue();
-            mContext.getTheme().resolveAttribute(R.attr.cpGridItemSpace, typedValue, true);
+
             int space = mContext.getResources().getDimensionPixelSize(R.dimen.cp_grid_item_space);
             int padding = mContext.getResources().getDimensionPixelSize(R.dimen.cp_default_padding);
             int indexBarWidth = mContext.getResources().getDimensionPixelSize(R.dimen.cp_index_bar_width);

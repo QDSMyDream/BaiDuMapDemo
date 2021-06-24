@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -16,6 +17,7 @@ import com.szjoin.joinmapmodule.bean.JoinCityBean;
 import java.util.List;
 
 public class JoinDividerItemDecoration extends RecyclerView.ItemDecoration {
+    private final String TAG = getClass().getSimpleName();
     private float dividerHeight;
     private float dividerHeight_big;
     private Paint mPaint;
@@ -28,15 +30,8 @@ public class JoinDividerItemDecoration extends RecyclerView.ItemDecoration {
         this.mData = data;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint_big = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.cpSectionSpacingBackground, typedValue, true);
-        mPaint.setColor(context.getResources().getColor(typedValue.resourceId));
-
-        TypedValue typedValue_deep = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.cpSectionSpacingDeepBackground, typedValue_deep, true);
-        mPaint_big.setColor(context.getResources().getColor(typedValue_deep.resourceId));
-
+        mPaint.setColor(context.getResources().getColor(R.color.cp_color_section_bg) );
+        mPaint_big.setColor(context.getResources().getColor(R.color.cp_color_section_bg_deep));
         dividerHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0.5f, context.getResources().getDisplayMetrics());
         dividerHeight_big = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, context.getResources().getDisplayMetrics());
     }

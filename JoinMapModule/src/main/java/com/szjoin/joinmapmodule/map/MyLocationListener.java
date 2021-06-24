@@ -22,8 +22,7 @@ public class MyLocationListener extends BDAbstractLocationListener {
 
     @Override
     public void onReceiveLocation(BDLocation location) {
-        BaiduMapLocation.getInstance().onReceiveLocation(location);
-        BaiduMapLocation.printLocationInfo(location);
+        Log.e(TAG, "onReceiveLocation: " );
         if (logErrorCode(location.getLocType())) {
             baiduLocationReceiver.onReceiveLocation(location);
         }

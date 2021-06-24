@@ -77,15 +77,9 @@ public class JoinCitySidebar extends View {
         mIndexItems = new ArrayList<>();
         mIndexItems.addAll(Arrays.asList(DEFAULT_INDEX_ITEMS));
 
-        TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.cpIndexBarTextSize, typedValue, true);
-        mTextSize = context.getResources().getDimensionPixelSize(typedValue.resourceId);
-
-        context.getTheme().resolveAttribute(R.attr.cpIndexBarNormalTextColor, typedValue, true);
-        mTextColor = context.getResources().getColor(typedValue.resourceId);
-
-        context.getTheme().resolveAttribute(R.attr.cpIndexBarSelectedTextColor, typedValue, true);
-        mTextTouchedColor = context.getResources().getColor(typedValue.resourceId);
+        mTextSize = context.getResources().getDimensionPixelSize(R.dimen.cp_index_bar_text_size);
+        mTextColor = context.getResources().getColor(R.color.cp_color_gray);
+        mTextTouchedColor = context.getResources().getColor(R.color.cp_color_gray_dark);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(mTextSize);

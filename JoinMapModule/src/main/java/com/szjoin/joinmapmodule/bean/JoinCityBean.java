@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.szjoin.joinmapmodule.utils.JoinMapUtils;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
  * 创建日期：2021/06/10 10:21
  * 类描述：
  */
-public class JoinCityBean {
+public class JoinCityBean  implements Serializable {
     private String name;
     private String province;
     private String pinyin;

@@ -2,10 +2,13 @@ package com.szjoin.joinmapmodule.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;
+
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.text.TextPaint;
+
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -19,6 +22,8 @@ import java.util.List;
 
 
 public class JoinSectionItemDecoration extends RecyclerView.ItemDecoration {
+    private final String TAG = getClass().getSimpleName();
+
     private List<JoinCityBean> mData;
     private Paint mBgPaint;
     private TextPaint mTextPaint;
@@ -34,35 +39,20 @@ public class JoinSectionItemDecoration extends RecyclerView.ItemDecoration {
 
     public JoinSectionItemDecoration(Context context, List<JoinCityBean> data) {
         this.mData = data;
-        TypedValue typedValue = new TypedValue();
 
-        context.getTheme().resolveAttribute(R.attr.cpSectionBackground, typedValue, true);
-        mBgColor = context.getResources().getColor(typedValue.resourceId);
-
-        context.getTheme().resolveAttribute(R.attr.cpSectionHeight, typedValue, true);
-        mSectionHeight = context.getResources().getDimensionPixelSize(typedValue.resourceId);
-
-        context.getTheme().resolveAttribute(R.attr.cpSectionTextSize, typedValue, true);
-        mTextSize = context.getResources().getDimensionPixelSize(typedValue.resourceId);
-
-        context.getTheme().resolveAttribute(R.attr.cpSectionTextColor, typedValue, true);
-        mTextColor = context.getResources().getColor(typedValue.resourceId);
-
+        mBgColor = context.getResources().getColor(R.color.cp_color_section_bg_back);
+        mSectionHeight = context.getResources().getDimensionPixelSize(R.dimen.cp_section_height);
+        mTextSize = context.getResources().getDimensionPixelSize(R.dimen.cp_section_text_size);
+        mTextColor = context.getResources().getColor(R.color.cp_color_black);
         mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBgPaint.setColor(mBgColor);
-
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setColor(mTextColor);
         mTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-
         mBounds = new Rect();
-
         mPaint_divider_head = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        TypedValue typedValue2 = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.cpSectionSpacingBackground, typedValue2, true);
-        mPaint_divider_head.setColor(context.getResources().getColor(typedValue2.resourceId));
+        mPaint_divider_head.setColor(context.getResources().getColor(R.color.cp_color_section_bg));
         dividerHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0.5f, context.getResources().getDisplayMetrics());
     }
 

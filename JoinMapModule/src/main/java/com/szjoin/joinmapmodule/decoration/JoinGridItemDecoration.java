@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class JoinGridItemDecoration extends RecyclerView.ItemDecoration{
+    private final String TAG = getClass().getSimpleName();
     private int mSpanCount;
     private int mSpace;
 

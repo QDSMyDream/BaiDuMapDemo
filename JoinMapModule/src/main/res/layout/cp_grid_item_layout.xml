@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cp_grid_item_layout"
     android:layout_width="wrap_content"
-    android:layout_height="?attr/cpListItemHeight"
-    android:background="?attr/cpGridItemBackground"
+    android:layout_height="@dimen/cp_list_item_height"
+    android:background="@drawable/shape_edt"
     android:foreground="?attr/selectableItemBackground"
     android:gravity="center"
     android:orientation="horizontal">
@@ -13,10 +13,10 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginRight="5dp"
-        android:background="?attr/cpListItemHotBackGround"
+        android:background="@drawable/shape_back_hot"
         android:gravity="center"
-        android:textColor="?attr/cpListItemHotTextColor"
-        android:textSize="?attr/cpListItemHotTextSize"
+        android:textColor="@color/z_txtcolor_hot"
+        android:textSize="@dimen/z_grid_hot_size"
         android:visibility="gone" />
 
     <TextView
@@ -27,6 +27,6 @@
         android:maxLines="1"
         android:paddingTop="@dimen/cp_grid_item_padding"
         android:paddingBottom="@dimen/cp_grid_item_padding"
-        android:textColor="?attr/cpListItemTextColor"
-        android:textSize="?attr/cpListItemTextSize" />
+        android:textColor="@color/cp_color_gray_deep"
+        android:textSize="@dimen/cp_list_item_text_size" />
 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.szjoin.joinmapmodule;
 
 import android.content.Context;
+
 import android.text.TextUtils;
 import android.util.Log;
+
 
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,7 @@ import com.szjoin.joinmapmodule.utils.JoinCityState;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**

@@ -13,7 +13,7 @@
         android:id="@+id/cp_list_item_location_layout"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:background="?attr/cpGridItemBackground"
+        android:background="@drawable/shape_edt"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -27,7 +27,7 @@
             android:id="@+id/cp_gird_item_type_img"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="?attr/cpListItemLocBackGround"
+            android:background="@mipmap/icon_location"
             android:visibility="gone" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:text="正在定位..."
-            android:textColor="?attr/cpListItemTextColor"
-            android:textSize="?attr/cpListItemTextSize" />
+            android:textColor="@color/cp_color_gray_deep"
+            android:textSize="@dimen/cp_list_item_text_size" />
     </LinearLayout>
 </LinearLayout>

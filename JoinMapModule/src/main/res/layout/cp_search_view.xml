@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/shape_edt"
-        android:hint="?attr/cpSearchHintText"
+        android:hint="@string/cp_search_hint_text"
         android:maxLength="20"
         android:maxLines="1"
         android:paddingLeft="15dp"
@@ -23,10 +23,10 @@
         android:paddingRight="10dp"
         android:paddingBottom="8dp"
         android:singleLine="true"
-        android:textColor="?attr/cpSearchTextColor"
-        android:textColorHint="?attr/cpSearchHintTextColor"
+        android:textColor="@color/cp_color_gray_dark"
+        android:textColorHint="@color/cp_color_gray_light"
         android:textCursorDrawable="@drawable/shape_cursor_edt"
-        android:textSize="?attr/cpSearchTextSize" />
+        android:textSize="@dimen/cp_search_text_size" />
 
     <ImageView
         android:id="@+id/cp_clear_all"
@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
         android:padding="2dp"
         android:scaleType="fitCenter"
-        android:src="?attr/cpClearTextIcon"
+        android:src="@mipmap/cp_icon_clear_all"
         android:visibility="gone" />
 
     <Space
@@ -56,6 +56,6 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:text="@string/cp_cancel"
-        android:textColor="?attr/cpCancelTextColor"
-        android:textSize="?attr/cpCancelTextSize" />
+        android:textColor="@color/cp_color_gray"
+        android:textSize="@dimen/cp_cancel_text_size" />
 </LinearLayout>

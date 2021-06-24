@@ -190,7 +190,9 @@ public class LocationService {
      */
     public static JoinCityBean onReceiveLocation(BDLocation bdLocation) {
         if (get().mLocatedCity == null || bdLocation.getCity() != null) {
-            get().mLocatedCity = new JoinCityBean(bdLocation.getCity(), bdLocation.getProvince(), bdLocation.getCityCode());
+            get().mLocatedCity = new JoinCityBean(bdLocation.getCity(),
+                    bdLocation.getProvince(), bdLocation.getCityCode(),
+                    bdLocation.getLatitude()+"",bdLocation.getLongitude()+"");
         }
         return get().mLocatedCity;
     }
