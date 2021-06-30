@@ -63,8 +63,7 @@ import java.util.List;
  * 创建日期：2021/06/10 10:05
  * 类描述：城市选择布局弹窗
  */
-public class JoinCityPickerDialogFragment extends DialogFragment implements TextWatcher, JoinInnerListener, View.OnClickListener, JoinCitySidebar.OnIndexTouchedChangedListener, MapLocationReceiver
-{
+public class JoinCityPickerDialogFragment extends DialogFragment implements TextWatcher, JoinInnerListener, View.OnClickListener, JoinCitySidebar.OnIndexTouchedChangedListener, MapLocationReceiver {
     private String TAG = getClass().getSimpleName();
 
     private LinearLayout cpSearchView;
@@ -112,7 +111,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
 
     private int height;
     private int width;
-    private LocationClient mClient;
+//    private LocationClient mClient;
     private MyLocationListener myLocationListener;
 
     @SuppressLint("ResourceType")
@@ -158,11 +157,10 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
 
     private void initLocation() {
         myLocationListener = new MyLocationListener(this);
-        mClient = new LocationClient(getActivity().getApplicationContext());
-        mClient.setLocOption(LocationService.get().getDefaultLocationClientOption());
-        mClient.registerLocationListener(myLocationListener);
-
-
+//        mClient = new LocationClient(getActivity().getApplicationContext());
+//        mClient.setLocOption(LocationService.get().getDefaultLocationClientOption());
+//        mClient.registerLocationListener(myLocationListener);
+        LocationService.start(myLocationListener);
     }
 
     private void initFindView() {
@@ -361,7 +359,6 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         cpClearAll.setOnClickListener(this);
 
 
-
     }
 
     private void initPinyinData(List<JoinCityBean> list) {
@@ -394,7 +391,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         if (joinOnPickListener != null) {
             joinOnPickListener.onPick(position, data);
         }
-        mClient.stop();
+
     }
 
     @Override
@@ -403,13 +400,13 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         if (joinOnPickListener != null) {
             joinOnPickListener.onPick(position, city);
         }
-        mClient.stop();
+
     }
 
     @Override
     public void locate() {
         Log.e(TAG, "locate: ");
-        mClient.start();
+
     }
 
     @Override
@@ -417,7 +414,6 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
         int id = v.getId();
         if (id == R.id.cp_cancel) {
             dismiss();
-            mClient.stop();
             if (joinOnPickListener != null) {
                 joinOnPickListener.onCancel();
             }
@@ -519,7 +515,7 @@ public class JoinCityPickerDialogFragment extends DialogFragment implements Text
                     bdLocation.getLatitude() + "", bdLocation.getLongitude() + ""), JoinCityState.SUCCESS
 
             );
-            mClient.stop();
+            LocationService.stop(myLocationListener);
         }
 
 

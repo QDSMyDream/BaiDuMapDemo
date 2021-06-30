@@ -40,6 +40,9 @@ public class MyLocationListener extends BDAbstractLocationListener {
 //        Log.e(TAG, "onReceiveLocation: 获取定位精度" + radius);
 //        Log.e(TAG, "onReceiveLocation: 获取经纬度坐标类型" + coorType);
 //        Log.e(TAG, "onReceiveLocation: 获取定位类型、定位错误返回码" + errorCode);
+
+
+//        LocationService.stop(this);
     }
 
 

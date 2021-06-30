@@ -1,6 +1,7 @@
 package com.szjoin.joinmapmodule.map;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -18,9 +19,10 @@ import com.szjoin.joinmapmodule.bean.JoinCityBean;
  */
 public class LocationService {
 
+    private  final String TAG = getClass().getSimpleName();
     private static volatile LocationService sInstance = null;
 
-    private LocationClient mClient = null;
+    private  LocationClient mClient = null;
     private LocationClientOption mOption, mDIYOption;
 
     private JoinCityBean mLocatedCity = null;
@@ -151,6 +153,7 @@ public class LocationService {
      * 开始定位
      */
     public LocationService start() {
+        Log.e(TAG, "start: "+ mClient);
         if (mClient != null && !mClient.isStarted()) {
             mClient.start();
         }
@@ -168,6 +171,7 @@ public class LocationService {
      * 停止定位
      */
     public LocationService stop() {
+        Log.e(TAG, "stop: "+ mClient);
         if (mClient != null && mClient.isStarted()) {
             mClient.stop();
         }

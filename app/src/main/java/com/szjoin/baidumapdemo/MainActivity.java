@@ -78,6 +78,7 @@ public class MainActivity extends FragmentActivity implements MapLocationReceive
             }
         });
         myLocationListener = new MyLocationListener(this);
+
         LocationService.start(myLocationListener);
     }
 
